@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+
+  "name": "MediaPilot",
+  "short_name": "MediaPilot",
+
+  "version": "5.0",
+
+  "description": "Voice-controlled YouTube assistant with ad skipping, video controls, and AI summaries.",
+
+  "permissions": [
+    "storage",
+    "debugger",
+    "tabs"
+  ],
+
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "http://localhost:3000/*",
+    "https://generativelanguage.googleapis.com/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

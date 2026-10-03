@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MediaPilot - Smart Controller</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      width: 310px;
+      padding: 16px;
+      margin: 0;
+      background: #0f172a;
+      color: #f8fafc;
+    }
+    h2 {
+      font-size: 17px;
+      margin: 0 0 4px 0;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .subtext {
+      font-size: 12px;
+      color: #94a3b8;
+      margin: 0 0 12px 0;
+      line-height: 1.4;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+    h3 {
+      font-size: 13px;
+      margin: 0 0 8px 0;
+      color: #e2e8f0;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    button {
+      width: 100%;
+      padding: 8px 12px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    .btn-primary {
+      background: #0284c7;
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: #0369a1;
+    }
+    .btn-secondary {
+      background: #334155;
+      color: #f8fafc;
+    }
+    .btn-secondary:hover {
+      background: #475569;
+    }
+    .btn-summary {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+    }
+    .btn-summary:hover {
+      opacity: 0.95;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 7px 10px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+    select:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
+    optgroup {
+      background: #1e293b;
+      color: #38bdf8;
+      font-weight: bold;
+    }
+    option {
+      background: #0f172a;
+      color: #f8fafc;
+      font-weight: normal;
+    }
+    #voiceStatus {
+      font-size: 12px;
+      margin-top: 6px;
+      color: #a5f3fc;
+      font-weight: 500;
+    }
+    .examples {
+      font-size: 11px;
+      color: #94a3b8;
+      background: #0f172a;
+      border-radius: 6px;
+      padding: 8px;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .button-group {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .button-group button {
+      margin-top: 0;
+      flex: 1;
+      font-size: 11px;
+      padding: 6px 4px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎬 MediaPilot AI</h2>
+  <p class="subtext">Smart assistant & AI video summarizer (supports videos with & without captions in all world languages).</p>
+
+  <!-- AUTO SKIP -->
+  <div class="card">
+    <label>
+      <input type="checkbox" id="enabledToggle">
+      <span>Auto Skip Ads</span>
+    </label>
+  </div>
+
+  <!-- AI SUMMARY -->
+  <div class="card">
+    <h3>✨ AI Video Summary</h3>
+    <label for="summaryLanguage" style="font-size: 11px; color: #94a3b8; margin-bottom: 4px;">Summary Output Language:</label>
+    <select id="summaryLanguage">
+      <optgroup label="Popular Indian & South Asian Languages">
+        <option value="Telugu">తెలుగు (Telugu)</option>
+        <option value="Hindi">हिन्दी (Hindi)</option>
+        <option value="Malayalam">മലയാളം (Malayalam)</option>
+        <option value="Tamil">தமிழ் (Tamil)</option>
+        <option value="Kannada">ಕನ್ನಡ (Kannada)</option>
+        <option value="Marathi">मराठी (Marathi)</option>
+        <option value="Bengali">বাংলা (Bengali)</option>
+        <option value="Gujarati">ગુજરાતી (Gujarati)</option>
+        <option value="Punjabi">ਪੰਜਾਬੀ (Punjabi)</option>
+        <option value="Odia">ଓଡ଼ିଆ (Odia)</option>
+        <option value="Assamese">অসমীয়া (Assamese)</option>
+        <option value="Urdu">اردو (Urdu)</option>
+        <option value="Sanskrit">संस्कृतम् (Sanskrit)</option>
+        <option value="Nepali">नेपाली (Nepali)</option>
+        <option value="Sinhala">සිංහල (Sinhala)</option>
+        <option value="Konkani">कोंकणी (Konkani)</option>
+        <option value="Maithili">मैथिली (Maithili)</option>
+        <option value="Sindhi">سنڌي (Sindhi)</option>
+      </optgroup>
+      <optgroup label="Global & European Languages">
+        <option value="English" selected>English</option>
+        <option value="Spanish">Español (Spanish)</option>
+        <option value="French">Français (French)</option>
+        <option value="German">Deutsch (German)</option>
+        <option value="Italian">Italiano (Italian)</option>
+        <option value="Portuguese">Português (Portuguese)</option>
+        <option value="Russian">Русский (Russian)</option>
+        <option value="Ukrainian">Українська (Ukrainian)</option>
+        <option value="Polish">Polski (Polish)</option>
+        <option value="Dutch">Nederlands (Dutch)</option>
+        <option value="Swedish">Svenska (Swedish)</option>
+        <option value="Norwegian">Norsk (Norwegian)</option>
+        <option value="Danish">Dansk (Danish)</option>
+        <option value="Finnish">Suomi (Finnish)</option>
+        <option value="Greek">Ελληνικά (Greek)</option>
+        <option value="Czech">Čeština (Czech)</option>
+        <option value="Hungarian">Magyar (Hungarian)</option>
+        <option value="Romanian">Română (Romanian)</option>
+        <option value="Bulgarian">Български (Bulgarian)</option>
+        <option value="Serbian">Српски (Serbian)</option>
+        <option value="Croatian">Hrvatski (Croatian)</option>
+        <option value="Slovak">Slovenčina (Slovak)</option>
+        <option value="Turkish">Türkçe (Turkish)</option>
+        <option value="Irish">Gaeilge (Irish)</option>
+        <option value="Welsh">Cymraeg (Welsh)</option>
+      </optgroup>
+      <optgroup label="East & Southeast Asian Languages">
+        <option value="Japanese">日本語 (Japanese)</option>
+        <option value="Korean">한국어 (Korean)</option>
+        <option value="Chinese (Simplified)">简体中文 (Chinese Simplified)</option>
+        <option value="Chinese (Traditional)">繁體中文 (Chinese Traditional)</option>
+        <option value="Vietnamese">Tiếng Việt (Vietnamese)</option>
+        <option value="Thai">ไทย (Thai)</option>
+        <option value="Indonesian">Bahasa Indonesia (Indonesian)</option>
+        <option value="Malay">Bahasa Melayu (Malay)</option>
+        <option value="Filipino">Filipino (Tagalog)</option>
+        <option value="Burmese">မြန်မာ (Burmese)</option>
+        <option value="Khmer">ភាសាខ្មែរ (Khmer)</option>
+        <option value="Mongolian">Монгол (Mongolian)</option>
+        <option value="Kazakh">Қазақ (Kazakh)</option>
+        <option value="Uzbek">Oʻzbek (Uzbek)</option>
+      </optgroup>
+      <optgroup label="Middle Eastern Languages">
+        <option value="Arabic">العربية (Arabic)</option>
+        <option value="Persian">فارسی (Persian / Farsi)</option>
+        <option value="Hebrew">עברית (Hebrew)</option>
+      </optgroup>
+      <optgroup label="African & Other World Languages">
+        <option value="Swahili">Kiswahili (Swahili)</option>
+        <option value="Amharic">አማርኛ (Amharic)</option>
+        <option value="Yoruba">Èdè Yorùbá (Yoruba)</option>
+        <option value="Igbo">Asụsụ Igbo (Igbo)</option>
+        <option value="Hausa">Harshen Hausa (Hausa)</option>
+        <option value="Zulu">isiZulu (Zulu)</option>
+        <option value="Afrikaans">Afrikaans</option>
+        <option value="Latin">Latina (Latin)</option>
+        <option value="Esperanto">Esperanto</option>
+      </optgroup>
+      <optgroup label="Other">
+        <option value="__CUSTOM__">✏️ Type Any Other Language...</option>
+      </optgroup>
+    </select>
+    <input type="text" id="customLanguageInput" placeholder="Type language name (e.g. Basque, Catalan, Icelandic)..." style="display: none;">
+    <button id="triggerSummary" class="btn-summary">⚡ Summarize Video</button>
+  </div>
+
+  <!-- VOICE CONTROL -->
+  <div class="card">
+    <h3>🎤 Voice Control</h3>
+    <button id="enableVoice" class="btn-primary">🎤 Enable Voice Control</button>
+    <div id="voiceStatus">Status: Voice control not enabled</div>
+    <div class="examples">
+      Say <b>"bujji"</b>, then say:<br>
+      • <i>"play video at 2x speed"</i><br>
+      • <i>"move to 10 minutes 35 seconds"</i><br>
+      • <i>"go to 1 hour 15 minutes"</i> / <i>"forward 30s"</i><br>
+      • <i>"give me video summary in Telugu"</i><br>
+      • <i>"pause"</i> / <i>"play"</i> / <i>"mute"</i>
+    </div>
+  </div>
+
+  <!-- MANUAL CONTROLS -->
+  <div class="card">
+    <h3>⏩ Quick Seek</h3>
+    <div class="button-group">
+      <button id="back30" class="btn-secondary">⏪ -30s</button>
+      <button id="forward30" class="btn-secondary">⏩ +30s</button>
+      <button id="forward60" class="btn-secondary">⏩ +60s</button>
+    </div>
+  </div>
+
+  <!-- API KEY SETTINGS -->
+  <div class="card">
+    <div id="settingsHeader" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none;">
+      <h3 style="margin: 0; display: flex; align-items: center; gap: 6px;">
+        ⚙️ <span>Gemini API Key & Status</span>
+      </h3>
+      <span id="settingsArrow" style="font-size: 11px; color: #94a3b8;">▼</span>
+    </div>
+    <div id="settingsBody" style="margin-top: 10px; display: none;">
+      <p style="font-size: 11px; color: #94a3b8; margin: 0 0 6px 0; line-height: 1.4;">
+        A high-speed multi-model AI key is active with automatic failover across 8 Gemini models. You can also paste your personal Google AI Studio key below:
+      </p>
+      <input type="password" id="customApiKeyInput" placeholder="AIzaSy... (leave blank for built-in)" autocomplete="off">
+      <div class="button-group" style="margin-top: 6px;">
+        <button id="saveApiKeyBtn" class="btn-primary" style="font-size: 11px; padding: 6px 8px;">💾 Save Key</button>
+        <button id="testApiKeyBtn" class="btn-secondary" style="font-size: 11px; padding: 6px 8px;">🧪 Test Key</button>
+      </div>
+      <div id="apiKeyStatus" style="font-size: 11px; margin-top: 8px; line-height: 1.4; display: none;"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
